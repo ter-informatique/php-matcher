@@ -16,8 +16,6 @@ final class PHPMatcherConstraint extends Constraint
 
     public function __construct(string $pattern)
     {
-        parent::__construct();
-
         $this->pattern = $pattern;
         $this->matcher = $this->createMatcher();
     }
