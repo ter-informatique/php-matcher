@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Coduo\PHPMatcher\Tests\PHPUnit;
 
 use Coduo\PHPMatcher\PHPUnit\PHPMatcherConstraint;
+use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\TestCase;
 
 class PHPMatcherConstraintTest extends TestCase
@@ -28,23 +29,21 @@ class PHPMatcherConstraintTest extends TestCase
         $this->assertFalse($constraint->evaluate(42, '', true));
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     * @expectedExceptionMessage Failed asserting that 42 matches the pattern
-     */
     public function test_it_sets_a_failure_description_if_not_given()
     {
+        $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('Failed asserting that 42 matches the pattern');
+
         $constraint = new PHPMatcherConstraint('@string@');
 
         $this->assertFalse($constraint->evaluate(42));
     }
 
-    /**
-     * @expectedException \PHPUnit\Framework\AssertionFailedError
-     * @expectedExceptionMessage integer "42" is not a valid string
-     */
     public function test_it_sets_additional_failure_description()
     {
+        $this->expectException(AssertionFailedError::class);
+        $this->expectExceptionMessage('integer "42" is not a valid string');
+
         $constraint = new PHPMatcherConstraint('@string@');
 
         $this->assertFalse($constraint->evaluate(42));
