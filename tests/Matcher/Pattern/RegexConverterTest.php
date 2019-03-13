@@ -15,7 +15,7 @@ class RegexConverterTest extends TestCase
      */
     private $converter;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->converter = new RegexConverter();
     }
